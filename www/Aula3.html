@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Processamento Digital de Sinais</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/simple.css">
+		<link rel="stylesheet" href="css/custom.css">
+		<!-- Theme used for syntax highlighting of code -->
+	    <link rel="stylesheet" href="lib/css/tomorrow.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                
+                <!-- slide 1 -->
+				<section>
+					<div class="bbox">
+						<h3 style="color:rgb(1, 65, 108)">Processamento<br/>Digital de Sinais</h3>
+						<hr class="shadow">
+						<p class="largefnt" style="text-align: center;">Fabrício Gomes</p>
+                        <p class="mediumfnt" style="text-align: center;">fgs.fabricio@gmail.com</p>
+                        <h3 class="largefnt" style="text-align: center; color:rgb(1, 65, 108)">Aula 3</h3>
+						<p class="mediumfnt" style="text-align: center;background-color: #bbdefb;margin:10%; margin-top: 0px">Apresentação disponível no GitHub: <a href="https://goo.gl/SLr7Gx">https://github.com/fgsfabricio/PDS_Unisul</a></p>
+						<p class="mediumfnt" style="text-align: center; margin-top: -60px">2018.1</p>
+
+						<table style="margin-top:10px">
+							<tbody class="invis" style="width:100%;">
+							<tr>
+								<td>
+									<img width="140px" height="110px" data-src="./img/logoUnisul.jpg" alt="Unisul logo">
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</section>
+
+                        
+                <!-- slide 2 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Sinais Discretos Importantes</h3>
+                        <p>Amostra Unitária</p>
+                        $$\delta[n] = \begin{cases}
+                                           0, n \neq 0\\
+                                           1, n = 0
+                                        \end{cases}$$
+                        <img width="390px" height="370px" data-src="./latexImg/amostraUnitaria.png" alt="Impulso">
+                    </div>
+                </section>
+                
+                <!-- slide 3 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Sinais Discretos Importantes</h3>
+                        <p>Degrau Unitário</p>
+                        $$u[n] = \begin{cases}
+                                           0, n < 0\\
+                                           1, n \geq 0
+                                        \end{cases}$$
+                        <img width="390px" height="370px" data-src="./latexImg/degrau.png" alt="Degraus">
+                    </div>
+                </section>
+                
+                <!-- slide 4 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Sinais Discretos Importantes</h3>
+                        <p>Exponencial</p>
+                        $$x[n] = A\alpha^n$$
+                        <img width="390px" height="370px" data-src="./latexImg/exp.png" alt="Exponencial">
+                    </div>
+                </section>
+                
+                <!-- slide 5 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Sinais Discretos Importantes</h3>
+                        <p>Senoidal</p>
+                        $$x[n]=cos(\omega_0n+\theta)$$
+                        <img width="390px" height="370px" data-src="./latexImg/cos.png" alt="Senoidal">
+                    </div>
+                </section>
+                
+                
+                <!-- slide 6 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Representação de sinais por Outros Sinais</h3>
+                        <p>Exemplo 1: representar $x[n]$ por $\delta[n]$.</p>
+                        <img width="390px" height="370px" data-src="./latexImg/repSig1.png" alt="Represetação de Sinais">
+                    </div>
+                </section>
+                
+                <!-- slide 7 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Representação de sinais por Outros Sinais</h3>
+                        <p class="mediumfnt" style="text-align: left;">Qualquer sinal $x[n]$ pode ser expresso por impulsos deslocados e escalados:</p>
+                          $$x[n] = \sum\limits_{k=-\infty}^{\infty} x[k]\delta[n-k]$$        
+                    </div>
+                </section>
+                
+                <!-- slide 8 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Resposta ao Impulso</h3>
+                        <ul>
+                          <li>Caracteriza o sistema Linear e Invariante no Tempo (LIT).</li><br>
+                          <li>Sabendo a resposta ao impulso, é possível classificar o sistema (em causal e/ou estável).</li><br>
+                          $$T \{ \delta[n] \} = h[n] $$
+                        </ul>
+                    </div>
+                </section>
+                
+                <!-- slide 9 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Soma de Convolução</h3>
+                        $$x[n] \Longrightarrow y[n]$$<br>
+                        $$\sum\limits_{k=-\infty}^{\infty} x[k]\delta[n-k] \Longrightarrow \sum\limits_{k=-\infty}^{\infty} x[k]h[n-k] $$<br>
+                        $$y[n] = x[n]*h[n]$$
+                    </div>
+                </section>
+                
+                <!-- slide 10 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Propriedadades da Soma de Convolução</h3>
+                        
+                    </div>
+                </section>
+
+   </div>
+  </div>
+
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+        
+        <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+        <script>
+          if( window.location.search.match( /print-pdf/gi ) ) {
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = 'reveal.js/css/print/pdf.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+          }
+        </script>
+
+        <script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// workaround to get a nice representation for printing
+				pdfMaxPagesPerSlide: 1,
+
+				// Vertical centering of slides
+				center: false,
+
+                // Hides the address bar on mobile devices
+                hideAddressBar: true,
+
+				// Display the page number of the current slide
+				slideNumber: 'c/t',
+
+				// Transition style
+				transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+				// Transition speed
+				transitionSpeed: 'fast', // default/fast/slow
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					// MathJax
+        			{ src: 'plugin/math/math.js', async: true }
+				]
+			});
+		</script>
+    </body>
+
+</html>

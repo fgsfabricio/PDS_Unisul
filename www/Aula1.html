@@ -1,0 +1,1061 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Processamento Digital de Sinais</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/simple.css">
+		<link rel="stylesheet" href="css/custom.css">
+		<!-- Theme used for syntax highlighting of code -->
+	    <link rel="stylesheet" href="lib/css/tomorrow.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<!-- slide 1 -->
+				<section>
+					<div class="bbox">
+						<h3>Processamento<br/>Digital de Sinais</h3>
+						<hr class="shadow">
+						<p class="largefnt" style="text-align: center;">Fabrício Gomes</p>
+            <p class="mediumfnt" style="text-align: center;">fgs.fabricio@gmail.com</p>
+						<p class="mediumfnt" style="text-align: center;background-color: lightgrey;margin:10%; margin-top: 60px">Apresentação disponível no GitHub: <a href="https://goo.gl/SLr7Gx">https://github.com/fgsfabricio/PDS_Unisul</a></p>
+						<p class="mediumfnt" style="text-align: center; margin-top: -60px">2018.1</p>
+
+						<table style="margin-top:10px">
+							<tbody class="invis" style="width:100%;">
+							<tr>
+								<td>
+									<img width="140px" height="110px" data-src="./img/logoUnisul.jpg" alt="Unisul logo">
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</section>
+
+								<!-- slide 2 -->
+								<section>
+                    <div class="bbox">
+                        <h3>Ementa</h3>
+                        <ul>
+													<li>Conteúdo</li>
+													<ul>
+                          	<li>Sistemas Discretos Amostrados</li>
+						   				 		 	<li>Amostragem</li>
+                           	<li>Transformada Z e suas propriedades</li>
+                           	<li> Transformada de Fourier Discreta (DFT)</li>
+                           	<li>Transformada Rapida de Fourier (FFT)</li>
+                           	<li>Filtros FIR e IIR</li>
+                           	<li>Aplicações de processamento digital de sinais</li><br>
+													</ul>
+                        </ul>
+
+												<ul>
+													<li>Cronograma</li>
+													<ul>
+														<li>Início dia 28 de Fevereiro - Término dia 04 de Julho</li>
+												 		<li>Divididos em 19 encontros</li>
+													</ul>
+                    </div>
+                </section>
+
+								<!-- slide 3 -->
+                <section>
+                    <div class="bbox">
+                        <h3>Organização</h3>
+                        <ol>
+                            <li><b>Topico 1: Conceitos basicos, sinais e sistemas no dominio do tempo discreto</b></li>
+                            <ul>
+                                <li>Introdução aos conceitos de processamento digital de sinais</li>
+                                <li>Análise e descrição de sistemas</li>
+                                <li>Teorema da Amostragem</li><br>
+                            </ul>
+                            <li><b>Topico 2: Análise em frequência de sinais e sistemas no dominio do tempo discreto</b></li>
+                            <ul>
+                                <li>Definição e propriedades da Transformada Discreta de Fourier (DFT)</li>
+                                <li>Resposta em frequência</li>
+                                <li>Introdução a FFT</li>
+                                <li>Transformada Z (parte 1)</li><br>
+                            </ul>
+                            <li><b>Topico 3: Filtros Digitais e projetos de filtros</b></li>
+                            <ul>
+                                <li>Transformada Z (parte 2)</li>
+                                <li>Estruturas de filtros</li>
+                                <li>Projetos de filtros FIR</li>
+                                <li>Projetos de filtros IIR</li>
+                            </ul>
+                        </ol>
+                    </div>
+                </section>
+
+
+								<!-- slide 4 -->
+                <section>
+                    <div class="bbox">
+                        <h3>Estrutura do Curso</h3>
+                        <ol>
+                            <li>Aulas</li>
+                            <ul>
+                                <li><b>Objetivo: </b> introduzir conceitos de processamento digital de sinais, ilustrando esses conceitos através de problemas e aplicações</li>
+                            </ul>
+						   <li>Exercicios</li>
+                            <ul>
+                                <li><b>Objetivo: </b>solidificar os conceitos vistos em sala de aula</li>
+                            </ul>
+                           <li>Avaliação e Critérios de Aprovação</li>
+                            <ul>
+                                <li><b>Frequência: superior a 75% </b></li>
+                                <li><b>Provas/trabalhos: </b></li>
+                                <ul>
+                                    <li>Prova 1 (P1) relacionada ao topico 1</li>
+                                    <li>Prova 2 (P2) relacionada ao topico 2</li>
+                                    <li>Prova 3 (P3) ou Trabalho (T3) relacionados ao topico 3</li>
+						        </ul>
+                                <li><b>Distribuição de notas</b>
+                                    <div class="largefnt" style="border: solid 3px red;margin-left:25%;margin-right:0%">$$\text{Média} = \frac{\text{P1 + P2 + P3}}{\text{3}} >= 7.0$$</div></li>
+                                <li >O aluno que nao alcançar a média >= 7.0, tera o direito de fazer a <b>Prova Final</b>, com a seguinte distribuição:
+                                   <div class="largefnt" style="border: solid 3px red;margin-left:25%;margin-right:0%">$$\text{Nota Final} = \frac{\text{Média + Prova Final}}{\text{2}} >= 6.0$$</div>
+                                </li>
+
+                            </ul>
+                        </ol>
+                    </div>
+                </section>
+
+
+								<!-- slide 5 -->
+                <section>
+                    <div class="bbox">
+                        <h3>Objetivos do Curso</h3>
+                        <ol>
+                            <li>Desenvolver metodologias para processamento de sinais em tempo discreto</li>
+                            <li>O entendimento do processo de conversao A/D e D/A</li>
+                            <li>Familiaridade com os filtros digitais em termos de design e implementação e como os vários tipos de filtros afetam as características do sinal</li>
+                            <li>Entendedimento da Transformada Discreta de Fourier e a análise espectral discreta</li>
+                            <li>Familiarizar-se com algumas aplicações do processamento digital no Matlab/Octave/Scilab</li>
+                            <li>Transformada Z (parte 1)</li><br>
+                            <li><b>Topico 3: Filtros Digitais e projetos de filtros</b></li>
+                            <ul>
+                                <li>Transformada Z (parte 2)</li>
+                                <li>Estruturas de filtros</li>
+                                <li>Projetos de filtros FIR</li>
+                                <li>Projetos de filtros IIR</li>
+                            </ul>
+                        </ol>
+                    </div>
+                </section>
+
+								<!-- slide 6 -->
+                <section>
+                    <div class="bbox">
+                        <h3>Pré-requisistos do Curso</h3>
+                        <ul>
+                            <li>Cálculo 1</li>
+                            <li>Circuitos elétricos</li>
+                            <li>Sinais e sistemas</li>
+														<li>Programação em Matlab/Octave/Scilab</li>
+                        </ul>
+                    </div>
+                </section>
+
+								<!-- slide 7 -->
+								<section>
+                    <div class="bbox">
+                        <h3>Bibliografia Básica</h3>
+												<div class="sliderow">
+ 														<div class="leftcol" style="width:45%">
+																<img src="./img/oppenheim.jpg" width="300px" alt="Oppenheim book">
+														</div>
+														<div class="rightcol" style="width:40%">
+																<img src="./img/nalon.jpeg" height="200%" width="300px" alt="Nalon book">
+														</div>
+                    		</div>
+									</div>
+                </section>
+
+								<!-- slide 8 -->
+								<section>
+                    <div class="bbox">
+                        <h3>Bibliografia Complementar</h3>
+												<div class="sliderow">
+ 														<div class="leftcol" style="width:60%">
+																<img src="./img/udemy.png" width="500px" alt="Oppenheim book">
+														</div>
+														<div class="rightcol" style="width:60%">
+																<img src="./img/edx.jpeg" width="90%" alt="Nalon book">
+														</div>
+                    		</div>
+									</div>
+                </section>
+
+
+								<!-- slide 9 -->
+								<section>
+										<div class="bbox">
+												<h3>Aplicações de PDS</h3><br>
+												<ul>
+                            <li>Processamento de voz e áudio</li>
+															<ul>
+																<li>Redução de ruído, reconhecimento de voz, compressão de áudio (MP3)</li><br>
+															</ul>
+														<li>Processamento de imagem</li>
+															<ul>
+																<li>Compressão de imagem (JPEG, PNG), reconhecimento de padrões</li><br>
+															</ul>
+														<li>Análise espectral</li>
+															<ul>
+																<li>Filtragem, detecção de objetos (radares)</li><br>
+															</ul>
+															<li>Finanças</li>
+																<ul>
+																	<li>Filtragem, análise gráfica de predição de cotações</li><br>
+																</ul>
+                        </ul>
+									</div>
+								</section>
+
+								<!-- slide 10 -->
+								<section>
+										<div class="bbox">
+												<h3>Introdução</h3><br>
+												<img src="./img/sinais.png" width="900px" alt="Esquema sinais">
+									</div>
+								</section>
+
+								<!-- slide 11 -->
+								<section>
+										<div class="bbox">
+												<h3>Introdução - Tipos de Sinais</h3><br>
+
+												<ul>
+                            <li>Sinais Analógicos: contínuos no tempo e valor (amplitude)</li>
+															<ul>
+																<li>Tensão, corrente</li><br>
+															</ul>
+														<li>Sinais Digitais: discretos em tempo e valor (amplitude)</li>
+															<ul>
+																<li>Sequência de bits (1s w 0s)</li><br>
+															</ul>
+														<li>Sinais Discretos: discretizados no tempo e contínuo em valor (amplitude)</li>
+															<ul>
+																<li>Representação gráfica na bolsa de valores, mudança de temperatura</li><br>
+															</ul>
+														</ul>
+
+									</div>
+								</section>
+
+								<!-- slide 12 -->
+								<section>
+										<div class="bbox">
+												<h3>Introdução - Tipos de Sinais</h3><br>
+
+												<div class="sliderow">
+													<div class="leftcol" style="width:50%;text-align:left;padding-left:20px">
+												<ul>
+                            <li>Sinais contínuos no tempo e valor (amplitude)</li><br>
+
+														<li>Sinais discretizados em tempo e valor (amplitude)</li><br>
+
+														<li>Sinais discretizados no tempo e contínuo em valor (amplitude)</li> <br>
+
+														<li>Sinais discretizados no tempo e discretizado em valor (amplitude)</li>
+
+													</div>
+													<div class="rightcol">
+														<img src="./img/sinais2.png" width="400px" alt="Tipos de sinais">
+													</div>
+												</div>
+
+									</div>
+								</section>
+
+								<!-- slide 13 -->
+								<section>
+										<div class="bbox">
+												<h3>Conceitos</h3><br>
+												<ul>
+                            <li><b>Sinal:</b> modelo de função de uma ou mais variáveis que transporta informação</li><br>
+															<ul>
+																<li>Ex.: Sinal de voz, de vídeo, de um sensor, sinal de recepção e transmissão,
+																	 sinal de controle, taxas de interesse (ações em finanças), velocidade do vento, pressão, abalos císmicos etc.
+																 </li><br>
+																 <li><b>Sinal Determinístico:</b> comportamento do sinal pode ser determinado com precisão</li><br>
+																 <li><b>Sinal Aleatório:</b> comportamento é descrito por modelos de probabilidade</li>
+															</ul>
+															<!-- <p class="smallfnt">
+															$$s(t) = \sin(\omega t) + \cos(\omega t), -\infty \leq t \leq \infty $$</p> -->
+												</ul>
+									</div>
+								</section>
+
+								<!-- slide 14 -->
+								<section>
+										<div class="bbox">
+												<h3>Sinais de Tempo Discreto</h3><br>
+												<ul>
+														<li>Sinais em tempo discreto são matematicamente reperesentados como uma sequência de números</li><br>
+
+														<p class="smallfnt">
+														$$x[n] = x(nT), -\infty \leq n \leq \infty $$</p>
+															<ul>
+																<li>$n$ é um número inteiro
+																 </li><br>
+																 <li>$T$ é o perído de amostragem</li><br>
+																 <li><b>Obs.:</b> denotamos $[.]$ para simbolizar funções de variáveis discreta e $(.)$ para denotar funções de variáveis contínuas.</li>
+															</ul>
+															<!-- <p class="smallfnt">
+															$$s(t) = \sin(\omega t) + \cos(\omega t), -\infty \leq t \leq \infty $$</p> -->
+												</ul>
+									</div>
+								</section>
+
+								<!-- slide 15 -->
+								<section>
+										<div class="bbox">
+												<h3>Sinais de Tempo Discreto</h3><br>
+												<img src="./img/sinalDiscreto.png" width="450px" alt="a sample network">
+												<img src="./img/sinal3.png" width="500px" alt="a sample network">
+
+									</div>
+								</section>
+
+								<!-- slide 16 -->
+								<section>
+										<div class="bbox">
+												<h3>Sinais de Tempo Discreto</h3><br>
+												<img src="./img/diag.png" width="650px" style="margin-top: 100px" alt="a sample network">
+												<p>Sistemas discretos de sinais contínuos</p>
+									</div>
+								</section>
+
+								<!-- slide 16 -->
+								<section>
+										<div class="bbox">
+												<h3>Propriedades dos sinais discretos</h3><br>
+												<p>Linearidade</p>
+												<ul>
+													<li>Um sistema diz-se linear se a saída correspondente a uma qualquer combinação linear de
+														entradas é a mesma combinação linear correspondente a cada uma das entradas. Esta condição é equivalente às propriedades:</li><br>
+													<li>Aditividade: $x_1[n] \rightarrow y_1[n] $ e $ x_2[n] \rightarrow y_2[n] \Rightarrow x_1[n]+x_2[n] \rightarrow y_1[n]+y_2[n]  $</li><br>
+													<li>Homogeneidade: $x_1[n] \rightarrow y_1[n] \Rightarrow ax_1[n] \rightarrow ay_1[n]$</li>
+
+												</ul>
+
+									</div>
+								</section>
+
+
+                <section>
+					<div class="bbox">
+						<div class="slideheader"><h3>Network representations</h3></div>
+						<div class="sliderow">
+							<div class="leftcol" style="width:70%;text-align:left;padding-left:20px">
+								<ul>
+									<li>Number of nodes: $N$</li>
+									<li>Number of links: $L$</li>
+								</ul>
+								<p class="smallfnt">
+								Adjacency matrix $A =
+								\begin{bmatrix}
+									0 & 1 & 1 & 1 & 1 & 0 \\
+									1 & 0 & 0 & 0 & 1 & 1 \\
+									1 & 0 & 0 & 1 & 1 & 0 \\
+									1 & 0 & 1 & 0 & 0 & 0 \\
+									1 & 1 & 1 & 0 & 0 & 1 \\
+									0 & 1 & 0 & 0 & 1 & 0 \\
+								\end{bmatrix}$
+								</p>
+								<p class="smallfnt">
+								Laplacian matrix $Q =
+								\begin{bmatrix}
+									4 & -1 & -1 & -1 & -1 & 0 \\
+									-1 & 3 & 0 & 0 & -1 & -1 \\
+									-1 & 0 & 3 & 1 & -1 & 0 \\
+									-1 & 0 & -1 & 2 & 0 & 0 \\
+									-1 & -1 & -1 & 0 & 4 & -1 \\
+									0 & -1 & 0 & 0 & -1 & 2 \\
+								\end{bmatrix}$
+								</p>
+							</div>
+							<div class="rightcol">
+								<img src="./img/billy.svg" width="400px" alt="a sample network">
+								<p class="smallfnt">In this example: $N = 6$ and $L = 9$.</p>
+							</div>
+						</div>
+						<div class="slidefooter">
+						</div>
+					</div>
+				</section>
+
+
+				<section>
+					<div class="bbox">
+						<div class="slideheader"><h3>Triangles in networks</h3></div>
+						<div class="sliderow">
+							<div class="leftcol" style="width:55%">
+								<p class="mediumfnt">How to count the number of <b>node-disjoint</b> triangles?</p>
+								<pre style="font-size: 10pt"><code class="python" data-trim contenteditable>
+								def triangles(G, A):
+								   triangles = 0
+								   for n1, n2, n3 in zip(G.nodes(), G.nodes(), G.nodes()):
+								      if (A[n1,n2] and A[n2,n3] and A[n3,n1]):
+								         triangles += 1
+								   return triangles / 6
+					</code></pre>
+							<p class="mediumfnt">Algorithms need exhaustive enumeration.</p>
+							</div>
+							<div class="rightcol">
+								<img src="./img/billy2.svg" width="400px" alt="a sample network">
+								<p class="smallfnt">In this example we have <b>4</b> triangles.</p>
+							</div>
+						</div>
+						<div class="slidefooter" style="background-color:lightgray;">
+							<p class="mediumfnt">Why are we interested in triangles anyway?</p>
+							<p class="smallfnt">
+							$$\text{Clustering coefficient }C = \frac{3 \times \text{number of triangles}}{\text{number of connected triplets of nodes}}$$</p>
+							<p class="mediumfnt">Important <b>metric</b> to classify networks.</p>
+						</div>
+					</div>
+				</section>
+
+
+				<section>
+					<div class="bbox">
+						<div class="slideheader"><h3>Triangles in networks</h3></div>
+						<div class="sliderow">
+							<div class="leftcol" style="width:55%">
+								<p class="mediumfnt">Spectral decomposition of the Adjacency Matrix:</p>
+								<p class="smallfnt">$A = X
+								\begin{bmatrix}
+									\lambda_1 &  & 0 \\
+									 & \ddots  &    \\
+									 0 &  & \lambda_{N} \\
+								\end{bmatrix}
+								X^T
+								$
+								</p>
+								<p class="mediumfnt">$\lambda_1 \geq \ldots \geq \lambda_{N}$ are the <b>eigenvalues</b> of the network.</p>
+								<p class="smallfnt" style="color:gray">$\mu_1 \geq \ldots \geq \mu_{N}$ are the <b>Laplacian eigenvalues</b><br/>(We will need them later)</p>
+							</div>
+							<div class="rightcol">
+								<img src="./img/billy2.svg" width="400px" alt="a sample network">
+								<p class="smallfnt">In this example the eigenvalues are:<br/>$3.182, 1.247, -1.802,$<br/>$-1.588,-0.445, -0.594$</p>
+							</div>
+						</div>
+						<div class="slidefooter fragment fade-in" style="bottom:-30px">
+							<p class="mediumfnt">Computing the <b>number of triangles</b> $\blacktriangle$ becomes simple, once you know the eigenvalues.
+							</p>
+							<p class="largefnt" style="border: solid 3px red;margin-left:35%;margin-right:35%">
+								$\blacktriangle = \frac{1}{6} \sum\limits_{i = 1}^{N} \lambda_i^3$
+							</p>
+						</div>
+					</div>
+				</section>
+
+
+				<section>
+					<div class="bbox">
+						<div class="slideheader"><h3>Network spectra</h3></div>
+						<div class="sliderow">
+							<div class="leftcol" style="border:#333 solid 1px;height:300px">
+								<p class="mediumfnt">Random network</p>
+								<p class="minor" style="position:absolute;top:30px;text-align:center;width:100%">Barbasi-Albert ($N$ = 5000)</p>
+								<img src="./img/g_ba.svg" width="330px" alt="a sample network" style="position:absolute;left:0px;bottom:0px;">
+								<img src="./img/ba-net.png" height="200px" alt="a sample network" style="position:absolute;left:240px;top:70px">
+
+							</div>
+							<div class="rightcol" style="border:#333 solid 1px;height:300px">
+								<p class="mediumfnt">Network of AS</p>
+								<p class="minor" style="position:absolute;top:30px;text-align:center;width:100%">tech-WHOIS, Mahadevan, P., Krioukov, D. et al. ($N$ = 7476)</p>
+								<img src="./img/tech-whois.svg" width="320px" alt="a sample network" style="position:absolute;left:0px;bottom:0px;">
+								<img src="./img/tech-whois-net.png" height="200px" alt="a sample network" style="position:absolute;left:220px;top:80px">
+
+							</div>
+						</div>
+						<div class="slidefooter" style="bottom:50px">
+							<p class="mediumfnt">The adjacency and the Laplacian spectra might not be as intuitive for humans as the graph representation,
+								but both contain the <b>complete information</b> about the topology of the network.</p>
+						</div>
+					</div>
+				</section>
+
+
+				<section data-background="./img/questionmark.svg" data-background-size="200px" data-background-position="bottom 20% left 50%" data-background-transition="zoom">
+					<div class="bbox">
+						<div style="position:absolute;top:100px">
+							<h3>Can we extract the hidden relations between the properties of a network and their corresponding spectra?</h3>
+						</div>
+					</div>
+				</section>
+
+
+				<section>
+					<div class="bbox">
+						<div class="slideheader"><h3>Proof of concept: counting triangles</h3></div>
+						<div class="sliderow">
+							<div class="leftcol" style="width:100%">
+								<ul>
+									<li>Idea: use <a href="http://www.cartesiangp.co.uk" target="_blank"><b>Cartesian Genetic Programming (CGP)</b></a> to evolve symbolic expression!
+									<ol>
+										<li>generate all networks with $N = 6$ nodes</li>
+										<li>compute $\blacktriangle$ as <i>target</i></li>
+										<li>compute $\lambda_1, \ldots, \lambda_6$ as <i>features</i></li>
+									</ol>
+									<li class="fragment fade-in" style="padding-top:40px">Does it work?</li>
+									<ol>
+										<li class="fragment fade-in">allow operations $\{+,\cdot^3\}$, do not bother with the constant $\frac{1}{6}$</li>
+										<span class="fragment fade-in" style="display:inline-block;width:50%">$6\blacktriangle = \sum\limits_{i = 1}^{6} \lambda_i^3$ in 99%!</span><span class="greencomment fragment fade-in">Okay, that was too easy...</span>
+										<li class="fragment fade-in">allow operations $\{+,\times,\cdot^3\}$, give constant $\frac{1}{6}$ as input node</li>
+										<span class="fragment fade-in" style="display:inline-block;width:50%">$\blacktriangle = \frac{1}{6}\sum\limits_{i = 1}^{6} \lambda_i^3$ in 15%!</span><span class="greencomment fragment fade-in">Probably still expected?</span>
+										<li class="fragment fade-in">allow operations $\{+,\times,\div,\cdot^3\}$, only constants $\{1,2,3\}$ as input nodes</li>
+										<span class="fragment fade-in" style="display:inline-block;width:50%">$\blacktriangle = \frac{1}{6}\sum\limits_{i = 1}^{6} \lambda_i^3$ in 2%!</span><span class="greencomment fragment fade-in">Maybe this could really work!?</span>
+									</ol>
+									</ul>
+							</div>
+						</div>
+					</div>
+				</section>
+
+
+				<section data-background="./img/greencheck.svg" data-background-size="160px" data-background-position="bottom 30% left 50%" data-background-transition="zoom">
+					<div class="bbox">
+						<div style="position:absolute;top:100px">
+							<h3>Rediscover a known formula for a network property</h3>
+						</div>
+					</div>
+				</section>
+
+
+				<section data-background="./img/questionmark.svg" data-background-size="160px" data-background-position="bottom 30% left 50%" data-background-transition="zoom">
+					<div class="bbox">
+						<div style="position:absolute;top:100px">
+							<h3>Discover <b>an unknown formula</b> for a network property</h3>
+						</div>
+					</div>
+				</section>
+
+
+				<section>
+					<div class="bbox">
+						<div class="slideheader"><h3>Network diameter</h3></div>
+						<div class="sliderow">
+							<div class="leftcol" style="width:55%">
+								<p class="mediumfnt">Length of the <b>longest of all shortest</b> paths in a network.</p>
+								<!--<p class="minor">The diameter of a disconnected network is $\infty$ but we will only consider connected networks here.</p>-->
+								<pre style="font-size: 10pt"><code class="python" data-trim contenteditable>
+								def diameter(G):
+								    diam = 0
+								    for src, dest in zip(G.nodes(), G.nodes()):
+								        path = shortest_path(src, dest)
+								        diam = max(len(path), diam)
+								    return diam
+							</code></pre>
+							<p class="smallfnt">The exact formula for the <b>network diameter</b> $\rho$ implies this exhaustive enumeration:</p>
+							<p class="smallfnt" style="border: solid 3px blue;margin-left:5%;margin-right:5%;padding-top:0px;">$$\rho = \max\limits_{src, dest} \min dist(src, dest)$$</p>
+							</div>
+							<div class="rightcol">
+								<img src="./img/billy3.svg" width="400px" alt="a sample network">
+								<p class="smallfnt">In this example the diameter is <b>3</b>.</p>
+							</div>
+						</div>
+						<div class="slidefooter" style="bottom:0px;background-color: lightgray">
+							<p class="mediumfnt">Why are we interested in the diameter anyway?</p>
+							<p class="smallfnt">Diameter = <b>worst-case lower bound</b> on number of hops<br/>
+							                    i.e. limits the speed of spreading/flooding in a network</p>
+						</div>
+					</div>
+				</section>
+
+
+				<section>
+					<div class="bbox">
+						<div class="slideheader"><h3>Symbolic regression for the diameter</h3></div>
+						<div class="sliderow">
+							<div class="leftcol" style="width:100%">
+								<ul>
+									<li>Idea: Try (systematically) different configurations with <b>CGP</b>!
+									<ol>
+										<li>generate all networks with $N = 6$ nodes</li>
+										<li>compute $\rho$ as the <i>target</i></li>
+										<li>compute $\lambda_1, \ldots, \lambda_6$ as <i>features</i></li>
+										<li>include $N, L$ and some basic constants $\{1,2,3\}$ as features as well</li>
+										<li>use different sets of operators like $\{+,-,\times,\cdot^2\}$ or $\{+,-,\times,\div,\sqrt{\cdot}\}$</li>
+									</ol>
+								</ul>
+									<p class="mediumfnt">Pick the expression that minimizes the <b>sum of absolute errors</b>:</p>
+									<p class="largefnt" style="border: solid 3px blue;margin-left:25%;margin-right:25%;padding-top:10px">$f(\hat{\rho}) = \sum\limits_{G} \mid \rho(G) - \widehat{\rho(G)} \mid$</p>
+								<ul>
+									<li class="fragment fade-in" style="padding-top:40px">Does it work?</li>
+										<span class="fragment fade-in" style="display:inline-block;width:50%">$\hat{\rho} = 2$</span><span class="greencomment fragment fade-in">What happened?</span>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</section>
+
+
+				<section>
+					<div class="bbox">
+						<div class="slideheader"><h3>Target distributions</h3></div>
+						<div class="sliderow">
+							<div class="leftcol" style="border:#333 solid 1px;height:370px">
+								<p class="largefnt">Triangles $\blacktriangle$</p>
+								<img src="./img/barchart_triangle.svg" width="100%" alt="">
+							</div>
+							<div class="rightcol" style="border:#333 solid 1px;height:370px">
+								<p class="largefnt">Diameter $\rho$</p>
+								<img src="./img/barchart_diameter.svg" width="100%" alt="">
+							</div>
+						</div>
+						<div class="slidefooter" style="bottom:0px">
+							<p class="mediumfnt">Exhaustive learning on all networks is no longer feasible.</p>
+							<p class="mediumfnt">Networks need to be <b>sampled</b> to create a good (diverse) learning set.</p>
+						</div>
+					</div>
+				</section>
+
+
+				<section>
+					<div class="bbox">
+						<div class="slideheader"><h3>Sampling networks</h3></div>
+						<div class="sliderow">
+							<div class="leftcol" style="border:#333 solid 1px;height:370px">
+								<p class="largefnt">
+								Augmented path graphs</p>
+								<table>
+									<tbody class="invis" style="width:100%">
+									<tr>
+										<td style="padding-top:10px;padding-bottom:10px;text-align: center;">
+											<img src="./img/apath1.svg" alt="aug path" style="width:300px">
+										</td>
+										<td>$\rho = 11$</td>
+									</tr>
+									<tr>
+										<td style="padding-top:10px;padding-bottom:10px;text-align: center;">
+											<img src="./img/apath2.svg" alt="aug path" style="width:300px">
+											</td>
+										<td>$\rho = 10$</td>
+									</tr>
+									<tr>
+										<td style="padding-top:10px;padding-bottom:10px;text-align: center;">
+											<img src="./img/apath3.svg" alt="aug path" style="width:300px">
+											</td>
+										<td>$\rho = 8$</td>
+									</tr>
+									</tbody>
+								</table>
+								<ul style="position:absolute;bottom:0px;padding:20px">
+									<li>sparse networks</li>
+									<li>varies $\rho$ by keeping $N$ constant</li>
+								</ul>
+							</div>
+							<div class="rightcol" style="border:#333 solid 1px;height:370px">
+								<p class="largefnt">
+								Barbell graphs</p>
+								<table>
+									<tbody class="invis" style="width:100%">
+									<tr>
+										<td style="padding-top:3px;padding-bottom:3px;text-align: center;">
+											<img src="./img/barbell_network1.svg" alt="aug path" style="height:50px"></td>
+										<td style="padding-bottom:10px">$\rho = 6$</td>
+									</tr>
+									<tr>
+										<td style="padding-top:3px;padding-bottom:3px;text-align: center;">
+											<img src="./img/barbell_network2.svg" alt="aug path" style="height:50px"></td>
+										<td style="padding-bottom:10px">$\rho = 8$</td>
+									</tr>
+									<tr>
+										<td style="padding-top:3px;padding-bottom:3px;text-align: center;">
+											<img src="./img/barbell_network3.svg" alt="aug path" style="height:75px"></td>
+										<td style="padding-bottom:17px">$\rho = 8$</td>
+									</tr>
+									</tbody>
+								</table>
+								<ul style="position:absolute;bottom:0px;padding:20px">
+									<li>dense networks</li>
+									<li>varies $N$ by keeping $\rho$ constant</li>
+								</ul>
+							</div>
+						</div>
+						<div class="slidefooter" style="border:#333 solid 1px; bottom:-10px">
+							<p class="largefnt">Mixed graphs</p>
+							<p class="smallfnt">50% augmented path + 50% barbell</p>
+						</div>
+					</div>
+				</section>
+
+
+				<section>
+					<div class="bbox">
+						<div class="slideheader"><h3>Computation pipeline</h3></div>
+						<div class="sliderow" style="height:500px">
+							<img src="./img/pipeline.svg" alt="computation pipeline">
+						</div>
+					</div>
+				</section>
+
+
+				<section>
+					<div class="bbox">
+						<div class="slideheader"><h3>CGP parametrization</h3></div>
+						<div class="sliderow">
+							<div class="leftcol" style="width:100%">
+							<table style="width:70%">
+								<thead>
+									<tr>
+										<th>parameter</th>
+										<th>value</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>fitness function</td>
+										<td>sum of absolute errors</td>
+									</tr>
+									<tr>
+										<td>evolutionary strategy</td>
+										<td>1+4</td>
+									</tr>
+									<tr>
+										<td>mutation type and rate</td>
+										<td>probabilistic (0.1)</td>
+									</tr>
+									<tr>
+										<td>node layout</td>
+										<td>1 row<br/>
+											200 columns</td>
+									</tr>
+									<tr>
+										<td>levels-back</td>
+										<td>unrestricted</td>
+									</tr>
+									<tr>
+										<td>number of generations</td>
+										<td>200000</td>
+									</tr>
+									<tr>
+										<td>operators</td>
+										<td>$+,-,\times,\div,\cdot^2,\cdot^3,\sqrt{\cdot},\log$</td>
+									</tr>
+									<tr>
+										<td>constants</td>
+										<td>$1,2,3,4,5,6,7,8,9$</td>
+									</tr>
+									<tr>
+										<td>featuresets</td>
+										<td>A) $N,L,\lambda_1,\lambda_2,\lambda_3,\lambda_N$<br/>
+										    B) $N,L,\mu_1,\mu_{N-1},\mu_{N-2},\mu_{N-3}$</td>
+									</tr>
+								</tbody>
+							</table>
+							</div>
+						</div>
+					</div>
+				</section>
+
+
+				<section>
+					<div class="bbox">
+						<div class="slideheader"><h3>Automatically generated formulas</h3></div>
+						<div class="sliderow">
+							<div class="leftcol" style="width:100%">
+								<p class="mediumfnt" style="background-color:darkseagreen;padding:10px">
+								$\begin{equation}
+								\hat{\rho} = \frac{\log{\left (2 L \mu_{N-3} + 6 \right )} + 6}{\log{\left (L \mu_{N-3} + \sqrt{5} \sqrt{\frac{1}{\mu_{N-1}}} \right )}} + \sqrt{5} \sqrt{\frac{1}{\mu_{N-1}}} + 3 \sqrt{82} \sqrt{\frac{1}{729 L \mu_{N-2} \mu_{N-3} - 5}}
+								\end{equation}$</p>
+								<p class="mediumfnt" style="background-color: thistle;padding:10px">
+								$\begin{equation}
+								\hat{\rho} = N - \frac{1 - \frac{1}{\left(L - N\right)^{\frac{3}{2}}}}{\frac{6 - \frac{6}{\left(L - N\right)^{\frac{3}{2}}}}{\sqrt{L - N}} + 4 \sqrt{L - N}} - 2 \sqrt{L - N} - \frac{1}{\sqrt{L - N}}
+								\end{equation}$</p>
+								<p class="mediumfnt" style="background-color: lightsteelblue;padding:10px">
+								$\begin{equation}
+								\hat{\rho} = \sqrt{\sqrt{N} + \frac{45 \mu_{N-3}}{\left(\mu_{N-1} + \mu_{N-3}\right)^{2}} + \log{\left (\frac{216}{\left(\mu_{N-1} + \mu_{N-3}\right)^{2}} \right )} - \frac{16}{9 \mu_{N-3}} + \frac{8 \sqrt[4]{\mu_{N-3}}}{L \mu_{N-1} \mu_{N-2}}}
+								\end{equation}$</p>
+							</div>
+						</div>
+					</div>
+				</section>
+
+
+				<section>
+					<div class="bbox">
+						<div class="slideheader"><h3>Bounds on the diameter</h3></div>
+						<div class="sliderow">
+
+							<p class="mediumfnt" style="background-color:darkseagreen;padding:10px">
+								$\begin{equation}
+								\hat{\rho} = \frac{\log{\left (2 L \mu_{N-3} + 6 \right )} + 6}{\log{\left (L \mu_{N-3} + \sqrt{5} \sqrt{\frac{1}{\mu_{N-1}}} \right )}} + \sqrt{5} \sqrt{\frac{1}{\mu_{N-1}}} + 3 \sqrt{82} \sqrt{\frac{1}{729 L \mu_{N-2} \mu_{N-3} - 5}}
+								\end{equation}$</p>
+							<div class="leftcol" style="width:69%;top:120px">
+								<p class="mediumfnt">Comparison to known analytical results from graph theory:</p>
+								<p class="smallfnt">Upper bound by Chung, F.R., Faber, V. and Manteuffel, T.A.: "An Upper bound on the diameter of a graph from eigenvalues associated with its Laplacian."</p>
+								<p class="minor">(See also Van Dam, E.R., Haemers, W.H.: "Eigenvalues and the diameter of graphs.")</p>
+								<p class="mediumfnt" style="border: solid 3px blue;margin-left:15%;margin-right:15%;padding:10px">
+								$\rho \leq \left\lfloor \frac{\cosh^{-1}(N-1)}{\cosh^{-1}\left(\frac{\mu_1 + \mu_{N-1}}{\mu_1 - \mu_{N-1}}\right)}\right\rfloor + 1$
+								</p>
+							</div>
+							<div class="rightcol" style="width:29%;top:120px">
+							<div style="color:#F00;font-size:18pt;position:absolute;right:85px;top:45px">$\hat{\rho}/\rho$</div>
+							<p class="mediumfnt">
+								<img src="./img/diameter-approx.svg" alt="This is how it looks">
+							</p>
+							</div>
+						</div>
+					</div>
+				</section>
+
+
+				<section>
+					<div class="bbox">
+						<div class="slideheader"><h3>Diameter on real networks</h3></div>
+						<div class="sliderow">
+							<div class="leftcol" style="height:500px">
+							<table style="width:60%">
+								<thead>
+									<tr>
+										<th>parameter</th>
+										<th>value</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>$N$</td>
+										<td>379</td>
+									</tr>
+									<tr>
+										<td>$L$</td>
+										<td>914</td>
+									</tr>
+									<tr>
+										<td>true diameter $\rho$</td>
+										<td>17</td>
+									</tr>
+									<tr style="background-color:lightcoral">
+										<td>approximated diameter $\hat{\rho}$</td>
+										<td>21.48</td>
+									</tr>
+									<tr style="background-color:lightsteelblue">
+										<td>upper bound</td>
+										<td>160.09</td>
+									</tr>
+								</tbody>
+							</table>
+							<img src="./img/ca-netscience_net.svg" style="height:220px;position:absolute;left:120px;bottom:40px;" alt="ca-netscience"/>
+							</div>
+							<div class="rightcol" style="height:500px">
+								<p class="mediumfnt">ca-netscience
+								<img src="./img/diamplot_ca-netscience.svg" style="height:400px;" alt="ca-netscience"/>
+								</p>
+								<p class="smallfnt" style="position:absolute;bottom:0px;right:40px;">source: <a href='http://www.networkrepository.com'>http://www.networkrepository.com</a></p>
+							</div>
+							<div class="slidefooter">
+							</div>
+						</div>
+					</div>
+				</section>
+
+
+				<section>
+					<div class="bbox">
+						<div class="slideheader"><h3>Diameter on real networks</h3></div>
+						<div class="sliderow">
+							<div class="leftcol" style="height:500px">
+							<table style="width:60%">
+								<thead>
+									<tr>
+										<th>parameter</th>
+										<th>value</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>$N$</td>
+										<td>4941</td>
+									</tr>
+									<tr>
+										<td>$L$</td>
+										<td>6594</td>
+									</tr>
+									<tr>
+										<td>true diameter $\rho$</td>
+										<td>46</td>
+									</tr>
+									<tr style="background-color:lightcoral">
+										<td>approximated diameter $\hat{\rho}$</td>
+										<td>97.52</td>
+									</tr>
+									<tr style="background-color:lightsteelblue">
+										<td>upper bound</td>
+										<td>749.49</td>
+									</tr>
+								</tbody>
+							</table>
+							<img src="./img/inf-power_net.svg" style="height:220px;position:absolute;left:120px;bottom:40px;" alt="ca-netscience"/>
+							</div>
+							<div class="rightcol" style="height:500px">
+								<p class="mediumfnt">inf-power
+								<img src="./img/diamplot_inf-power.svg" style="height:400px;" alt="ca-netscience"/>
+								</p>
+								<p class="smallfnt" style="position:absolute;bottom:0px;right:40px;">source: <a href='http://www.networkrepository.com'>http://www.networkrepository.com</a></p>
+							</div>
+							<div class="slidefooter">
+							</div>
+						</div>
+					</div>
+				</section>
+
+
+				<section>
+					<div class="bbox">
+						<div class="slideheader"><h3>Diameter on real networks</h3></div>
+						<div class="sliderow">
+							<div class="leftcol" style="height:500px">
+							<table style="width:60%">
+								<thead>
+									<tr>
+										<th>parameter</th>
+										<th>value</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>$N$</td>
+										<td>1458</td>
+									</tr>
+									<tr>
+										<td>$L$</td>
+										<td>1948</td>
+									</tr>
+									<tr>
+										<td>true diameter $\rho$</td>
+										<td>19</td>
+									</tr>
+									<tr style="background-color:lightcoral">
+										<td>approximated diameter $\hat{\rho}$</td>
+										<td>18.59</td>
+									</tr>
+									<tr style="background-color:lightsteelblue">
+										<td>upper bound</td>
+										<td>207.52</td>
+									</tr>
+								</tbody>
+							</table>
+							<img src="./img/bio-yeast_net.svg" style="height:220px;position:absolute;left:120px;bottom:40px;" alt="bio-yeast network"/>
+							</div>
+							<div class="rightcol" style="height:500px">
+								<p class="mediumfnt">bio-yeast
+								<img src="./img/diamplot_bio-yeast.svg" style="height:400px;" alt="bio-yeast"/>
+								</p>
+								<p class="smallfnt" style="position:absolute;bottom:0px;right:40px;">source: <a href='http://www.networkrepository.com'>http://www.networkrepository.com</a></p>
+							</div>
+							<div class="slidefooter">
+							</div>
+						</div>
+					</div>
+				</section>
+
+
+				<section>
+					<div class="bbox">
+						<div class="slideheader"><h3>Diameter on real networks</h3></div>
+						<div class="sliderow">
+							<img src="./img/diamplotoverview.svg" style="height:520px" alt="Diameterplot overview"/>
+						</div>
+					</div>
+				</section>
+
+
+				<section data-background="./img/questionmark.svg" data-background-size="200px" data-background-position="bottom 20% left 50%" data-background-transition="zoom">
+					<div class="bbox">
+						<div style="position:absolute;top:100px">
+							<h3>Can we extract the hidden relations between the properties of a network and their corresponding spectra?</h3>
+						</div>
+					</div>
+				</section>
+
+
+				<section>
+					<div class="bbox">
+						<div class="slideheader"><h3>Closing thoughts</h3></div>
+						<div class="sliderow">
+							<div class="leftcol" style="width:100%">
+								<ul>
+									<li>Automatically evolving approximate equations for network properties is possible.</li>
+									<li>Equations are unbiased by human preconceptions.</li>
+									<li>Unexpected results may aid and stimulate research in spectral graph theory and network science in general.</li>
+								</ul>
+								<h4 style="padding-top:40px">Challenges and possible (?) improvements</h4>
+								<ul>
+									<li>Sampling network space for stronger diversity.</li>
+									<li>Make complexity of formula part of the objective function.</li>
+									<li>Automatically evolve constants rather than using them as inputs.</li>
+									<li>Apply more advanced feature-selection methods to increase quality of formulas.</li>
+								</ul>
+							</div>
+							<div class="rightcol">
+							</div>
+						</div>
+						<div class="slidefooter" style="background-color:lightgray">
+
+						</div>
+					</div>
+				</section>
+
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// workaround to get a nice representation for printing
+				pdfMaxPagesPerSlide: 1,
+
+				// Vertical centering of slides
+				center: false,
+
+                // Hides the address bar on mobile devices
+                hideAddressBar: true,
+
+				// Display the page number of the current slide
+				slideNumber: 'c/t',
+
+				// Transition style
+				transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+				// Transition speed
+				transitionSpeed: 'fast', // default/fast/slow
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					// MathJax
+        			{ src: 'plugin/math/math.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>

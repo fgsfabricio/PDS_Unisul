@@ -1,0 +1,275 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Processamento Digital de Sinais</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/simple.css">
+		<link rel="stylesheet" href="css/custom.css">
+		<!-- Theme used for syntax highlighting of code -->
+	    <link rel="stylesheet" href="lib/css/tomorrow.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                
+                <!-- slide 1 -->
+				<section>
+					<div class="bbox">
+						<h3 style="color:rgb(1, 65, 108)">Processamento<br/>Digital de Sinais</h3>
+						<hr class="shadow">
+						<p class="largefnt" style="text-align: center;">Fabrício Gomes</p>
+                        <p class="mediumfnt" style="text-align: center;">fgs.fabricio@gmail.com</p>
+                        <h3 class="largefnt" style="text-align: center; color:rgb(1, 65, 108)">Aula 2</h3>
+						<p class="mediumfnt" style="text-align: center;background-color: #bbdefb;margin:10%; margin-top: 0px">Apresentação disponível no GitHub: <a href="https://goo.gl/SLr7Gx">https://github.com/fgsfabricio/PDS_Unisul</a></p>
+						<p class="mediumfnt" style="text-align: center; margin-top: -60px">2018.1</p>
+
+						<table style="margin-top:10px">
+							<tbody class="invis" style="width:100%;">
+							<tr>
+								<td>
+									<img width="140px" height="110px" data-src="./img/logoUnisul.jpg" alt="Unisul logo">
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</section>
+
+                <!-- slide 2 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Classificação dos Sistemas em Tempo Discreto</h3>
+                        <p>Sistemas Lineares</p>
+                        <ul>
+                            <li>Um sistema diz-se linear se a saída correspondente a uma qualquer combinação linear de
+                                entradas é a mesma combinação linear correspondente a cada uma das entradas. Esta condição é equivalente às propriedades:</li><br>
+                            <li>Aditividade: $x_1[n] \rightarrow y_1[n] $ e $ x_2[n] \rightarrow y_2[n] \Rightarrow x_1[n]+x_2[n] \rightarrow y_1[n]+y_2[n]$</li><br>
+                            <li>Homogeneidade: $x_1[n] \rightarrow y_1[n] \Rightarrow ax_1[n] \rightarrow ay_1[n]$</li>
+                        </ul>
+                    </div>
+                </section>
+                
+                <!-- slide 3 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Classificação dos Sistemas em Tempo Discreto</h3>
+                        <p>Sistemas Lineares</p>
+                        <p class="mediumfnt" style="text-align: left;"><b>Exemplo a): </b>Verificar se o sistema abaixo é linear.</p>
+                          $$y[n] = nx[n]$$
+                    </div>
+                </section>
+                
+                <!-- slide 4 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Classificação dos Sistemas em Tempo Discreto</h3>
+                        <p>Sistemas Lineares</p>
+                        <p class="mediumfnt" style="text-align: left;"><b>Exemplo b): </b>Verificar se o sistema abaixo é linear.</p>
+                          $$y[n] = x^2[n]$$
+                    </div>
+                </section>
+
+                <!-- slide 5 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Classificação dos Sistemas em Tempo Discreto</h3>
+                        <p>Sistemas Invariantes no Tempo</p>
+                        <ul>
+                          <li>Sistema para o qual ou atraso no tempo da sequência de entrada causa um deslocamento correspondente
+                              na sequência de saída, ou seja, o sistema não deve interferir temporalmente na saída em relação ao sinal de entrada.</li><br>
+                          <li>Se $x_2[n] = x_1[n - n_0]$, a saída produzirá uma sequência com valores $y_2[n] = y_1[n- n_0]$</li><br>
+                        </ul>
+                  </div>
+                </section>
+
+                <!-- slide 6 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Classificação dos Sistemas em Tempo Discreto</h3>
+                        <p>Sistemas Invariantes no Tempo</p>
+                        <p class="mediumfnt" style="text-align: left;"><b>Exemplo a): </b>Verificar se o sistema abaixo é invariante no tempo.</p>
+                          $$y[n] = 5x[n-10]$$
+                  </div>
+                </section>
+
+                <!-- slide 7 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Classificação dos Sistemas em Tempo Discreto</h3>
+                        <p>Sistemas Invariantes no Tempo</p>
+                        <p class="mediumfnt" style="text-align: left;"><b>Exemplo b): </b>Verificar se o sistema abaixo é invariante no tempo.</p>
+                          $$y[n] = \frac{x[n]}{n}$$
+                  </div>
+                </section>
+
+                <!-- slide 8 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Classificação dos Sistemas em Tempo Discreto</h3>
+                        <p>Sistemas Invariantes no Tempo</p>
+                        <p class="mediumfnt" style="text-align: left;"><b>Exemplo 2.7</b> O Acumulador (Oppenheim). Verificar se o sistema abaixo é invariante no tempo.</p>
+                          $$y[n] = \sum\limits_{k=-\infty}^{n} x[k]$$        
+                  </div>
+                </section>
+                
+                <!-- slide 9 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Classificação dos Sistemas em Tempo Discreto</h3>
+                        <p>Sistemas Causais</p>
+                        <ul>
+                          <li>Sistema para o qual a saída não depende de sequências de entradas futuras, ou seja, depende de valores da sequência para $n \leq n_0$.</li><br>
+                          <li>Isso implica que, se $x_1[n] = x_2[n]$ para $n \leq n_0 $, então $y_1[n] = y_2[n]$ para $n \leq n_0$.</li><br>
+                        </ul>
+                  </div>
+                </section>
+                
+                <!-- slide 10 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Classificação dos Sistemas em Tempo Discreto</h3>
+                        <p>Sistemas Causais</p>
+                        <p class="mediumfnt" style="text-align: left;"><b>Exemplo a): </b>Verificar se o sistema abaixo é causal.</p>
+                          $$y[n] = 5x[n-10]$$
+                  </div>
+                </section>
+                
+                <!-- slide 11 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Classificação dos Sistemas em Tempo Discreto</h3>
+                        <p>Sistemas Causais</p>
+                        <p class="mediumfnt" style="text-align: left;"><b>Exemplo b): </b>Verificar se o sistema abaixo é causal.</p>
+                          $$y[n] = x[-n]$$
+                  </div>
+                </section>
+                
+                <!-- slide 12 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Classificação dos Sistemas em Tempo Discreto</h3>
+                        <p>Sistemas Estáveis</p>
+                        <ul>
+                          <li>Um sistema é estável no sentido entrada limitada saída limitada (BIBO, do inglês bounded-input, bounded-output) se, e somente se, toda sequência limitada de entrada produzir uma sequência limitada de saída.</li><br>
+                          <li>Implica que $max(|x[n]|) < \infty$ e  $max(|y[n]|) < \infty$ </li><br>
+                          <li>E implica que $max(|y[n]|) < \infty$ </li><br>
+                        </ul>
+                  </div>
+                </section>
+                
+                
+                <!-- slide 12 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Classificação dos Sistemas em Tempo Discreto</h3>
+                        <p>Sistemas Estáveis</p>
+                        <p class="mediumfnt" style="text-align: left;"><b>Exemplo a): </b>Verificar se o sistema abaixo é estável.</p>
+                          $$y[n] = 5x[n-10]$$
+                  </div>
+                </section>
+                
+                <!-- slide 12 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Classificação dos Sistemas em Tempo Discreto</h3>
+                        <p>Sistemas Estáveis</p>
+                        <p class="mediumfnt" style="text-align: left;"><b>Exemplo b): </b>Verificar se o sistema abaixo é estável.</p>
+                          $$y[n] = \frac{x[n]}{n}$$
+                  </div>
+                </section>
+                
+                <!-- slide 13 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Sinais Discretos Importantes</h3>
+                        <p>Amostra Unitária</p>
+                        $$\delta[n] = \begin{cases}
+                                           0, n \neq 0\\
+                                           1, n = 0
+                                        \end{cases}$$
+                        <img width="390px" height="370px" data-src="./latexImg/amostraUnitaria.png" alt="Impulso">
+                    </div>
+                </section>
+                
+                <!-- slide 13 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Sinais Discretos Importantes</h3>
+                        <p>Degrau Unitário</p>
+                        $$u[n] = \begin{cases}
+                                           0, n < 0\\
+                                           1, n \geq 0
+                                        \end{cases}$$
+                        <img width="390px" height="370px" data-src="./latexImg/degrau.png" alt="Degraus">
+                    </div>
+                </section>
+                
+            </div>
+  </div>
+
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+        
+        <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+        <script>
+          if( window.location.search.match( /print-pdf/gi ) ) {
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = 'reveal.js/css/print/pdf.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+          }
+        </script>
+
+        <script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// workaround to get a nice representation for printing
+				pdfMaxPagesPerSlide: 1,
+
+				// Vertical centering of slides
+				center: false,
+
+                // Hides the address bar on mobile devices
+                hideAddressBar: true,
+
+				// Display the page number of the current slide
+				slideNumber: 'c/t',
+
+				// Transition style
+				transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+				// Transition speed
+				transitionSpeed: 'fast', // default/fast/slow
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					// MathJax
+        			{ src: 'plugin/math/math.js', async: true }
+				]
+			});
+		</script>
+    </body>
+
+</html>
