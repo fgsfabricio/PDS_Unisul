@@ -3,4 +3,6 @@
 **/*.aux
 **/*.log
 **/*.dvi
+**/*.dat
+**/*synctex.gz
 *.brackets.json

@@ -7,17 +7,18 @@
  n   xn
 -8    -0.98936
 -7    -0.65699
--6     0.27942
--5     0.95892  
--4     0.75680
+-6     0.0
+-5     0.0
+-4     0.0
 -3     0.0 
 -2     0.0
--1     1.0
- 0     2.0
- 1     1.0  
- 2     -2.0
- 3     1.0  
- 4    -0.75680
+-1     0.0
+ 0     3.0
+ 1     2.0  
+ 2     1.0
+ 3     0.0  
+ 4     0.0
+ 5	   0.0
 %-0.98936  -0.65699   0.27942   0.95892  
 % 0.75680  -0.14112  -0.90930  -0.84147   0.00000   0.84147   0.90930   0.14112  -0.75680
 
@@ -35,21 +36,21 @@
     every axis y label={at={(current axis.above origin)},anchor= north east},
     every axis plot post/.style={mark options={fill=black}},   
     xmin=-1.5,
-    xmax=3.5,
-    xtick={0, 1, 2, 3, 4},    
-    xticklabels={0, 1, 2, 3, 4}, 
-    extra x ticks={-1},
-    extra x tick labels={-1},
+    xmax=2.5,
+    xtick={-2,-0,0,1,2,3,4},  
+    xticklabels={-2,-1,0,1,2,3,4}, 
+    extra x ticks={-1, 0},
+    extra x tick labels={-1, 0},
 %    xtick={},    
 %    xticklabels={},
 %    extra x ticks={},
 %    extra x tick labels={},
     extra x tick style={ xticklabel style={yshift=0.0ex, anchor=north} },
     xlabel={$\boldsymbol{n}$},
-    ylabel={$\boldsymbol{x[n]}$},
-    ytick={-2,-1, 0, 1, 2},   
-    ymin=-2.5,
-    ymax=4.0,
+    ylabel={$\boldsymbol{h[n]}$},
+    ytick={-3,0,0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9},   
+    ymin=-0.0,
+    ymax=3.5,
 ]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \addplot+[ycomb,black, very thick] table [x={n}, y={xn}] {data.dat};
 \end{axis}

@@ -79,13 +79,26 @@
                 <section>
                     <div class="bbox">
                         <h3 style="color:rgb(1, 65, 108)">Sinais Discretos Importantes</h3>
+                        <p>Rampa Unitária</p>
+                        $$r[n] = \begin{cases}
+                                           0, n < 0\\
+                                           n, n \geq 0
+                                        \end{cases}$$
+                        <img width="390px" height="370px" data-src="./latexImg/ramp.png" alt="Função rampa unitária">
+                    </div>
+                </section>
+                
+                <!-- slide 5 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Sinais Discretos Importantes</h3>
                         <p>Exponencial</p>
                         $$x[n] = A\alpha^n$$
                         <img width="390px" height="370px" data-src="./latexImg/exp.png" alt="Exponencial">
                     </div>
                 </section>
                 
-                <!-- slide 5 -->
+                <!-- slide 6 -->
                 <section>
                     <div class="bbox">
                         <h3 style="color:rgb(1, 65, 108)">Sinais Discretos Importantes</h3>
@@ -95,17 +108,51 @@
                     </div>
                 </section>
                 
-                
-                <!-- slide 6 -->
+                        
+                <!-- slide 7 -->
                 <section>
                     <div class="bbox">
                         <h3 style="color:rgb(1, 65, 108)">Representação de sinais por Outros Sinais</h3>
-                        <p>Exemplo 1: representar $x[n]$ por $\delta[n]$.</p>
+                        <p>Exemplo 1: representar $\delta[n]$ por $u[n]$.</p>
+                        <img width="390px" height="370px" data-src="./latexImg/amostraUnitaria.png" alt="Impulso">
+                    </div>
+                </section>
+                
+                <!-- slide 8 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Representação de sinais por Outros Sinais</h3>
+                        <p>Exemplo 2: representar $r[n]$ por $u[n]$.</p>
+                        <img width="390px" height="370px" data-src="./latexImg/ramp.png" alt="Função rampa unitária">
+                    </div>
+                </section>
+                
+                <!-- slide 9 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Representação de sinais por Outros Sinais</h3>
+                        <p>Exemplo 3: representar graficamente $x[n] = u[n] - r[n] - r[n-4] + u[n-4]$.</p>
+                    </div>
+                </section>
+                
+                <!-- slide 10 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Representação de sinais por Outros Sinais</h3>
+                        <p>Exemplo 4: representar graficamente $x[n] = 2u[n] - 2\delta[n] - \delta[n-1]$.</p>
+                    </div>
+                </section>
+                
+                <!-- slide 11 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Representação de sinais por Outros Sinais</h3>
+                        <p>Exemplo 5: representar $x[n]$ por $\delta[n]$.</p>
                         <img width="390px" height="370px" data-src="./latexImg/repSig1.png" alt="Represetação de Sinais">
                     </div>
                 </section>
                 
-                <!-- slide 7 -->
+                <!-- slide 12 -->
                 <section>
                     <div class="bbox">
                         <h3 style="color:rgb(1, 65, 108)">Representação de sinais por Outros Sinais</h3>
@@ -114,7 +161,7 @@
                     </div>
                 </section>
                 
-                <!-- slide 8 -->
+                <!-- slide 13 -->
                 <section>
                     <div class="bbox">
                         <h3 style="color:rgb(1, 65, 108)">Resposta ao Impulso</h3>
@@ -126,7 +173,7 @@
                     </div>
                 </section>
                 
-                <!-- slide 9 -->
+                <!-- slide 14 -->
                 <section>
                     <div class="bbox">
                         <h3 style="color:rgb(1, 65, 108)">Soma de Convolução</h3>
@@ -136,10 +183,36 @@
                     </div>
                 </section>
                 
-                <!-- slide 10 -->
+                <!-- slide 15 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Soma de Convolução</h3>
+                        <p>Exemplo 1: Resolver $y[n] = x[n]*h[n]$.</p>
+                        <img width="390px" height="370px" data-src="./latexImg/conv1.png" alt="Represetação de Sinais">
+                        $*$
+                        <img width="390px" height="370px" data-src="./latexImg/conv3.png" alt="Represetação de Sinais">
+                    </div>
+                </section>
+                
+                <!-- slide 16 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Soma de Convolução</h3>
+                        <p>Exemplo 2: Resolver $y[n] = x[n]*h[n]$.</p>
+                        <img width="390px" height="370px" data-src="./latexImg/conv2.png" alt="Represetação de Sinais">
+                        $*$
+                        <img width="390px" height="370px" data-src="./latexImg/conv3.png" alt="Represetação de Sinais">
+                    </div>
+                </section>
+                
+                <!-- slide 17 -->
                 <section>
                     <div class="bbox">
                         <h3 style="color:rgb(1, 65, 108)">Propriedadades da Soma de Convolução</h3>
+                        <ul>
+                        <li>Comutativa: $x[n]*h[n] = h[n]*x[n]$</li><br>
+                        <li>Associativa: $y[n] = (x[n] * h_1[n]) * h_2[n] = x[n] * (h_1[n] * h_2[n])$</li>
+                        </ul>
                         
                     </div>
                 </section>
