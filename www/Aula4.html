@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Processamento Digital de Sinais</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/simple.css">
+		<link rel="stylesheet" href="css/custom.css">
+		<!-- Theme used for syntax highlighting of code -->
+	    <link rel="stylesheet" href="lib/css/tomorrow.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                
+                <!-- slide 1 -->
+				<section>
+					<div class="bbox">
+						<h3 style="color:rgb(1, 65, 108)">Processamento<br/>Digital de Sinais</h3>
+						<hr class="shadow">
+						<p class="largefnt" style="text-align: center;">Fabrício Gomes</p>
+                        <p class="mediumfnt" style="text-align: center;">fgs.fabricio@gmail.com</p>
+                        <h3 class="largefnt" style="text-align: center; color:rgb(1, 65, 108)">Aula 4</h3>
+						<p class="mediumfnt" style="text-align: center;background-color: #bbdefb;margin:10%; margin-top: 0px">Apresentação disponível no GitHub: <a href="https://github.com/fgsfabricio/PDS_Unisul">https://github.com/fgsfabricio/PDS_Unisul</a></p>
+						<p class="mediumfnt" style="text-align: center; margin-top: -60px">2018.1</p>
+
+						<table style="margin-top:10px">
+							<tbody class="invis" style="width:100%;">
+							<tr>
+								<td>
+									<img width="140px" height="110px" data-src="./img/logoUnisul.jpg" alt="Unisul logo">
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</section>
+
+                        
+                <!-- slide 2 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Representação de sinais por Outros Sinais</h3>
+                        <p>Exemplo 1: representar graficamente $x[n] = 2u[n] - 2\delta[n] - \delta[n-1]$.</p>
+                    </div>
+                </section>
+                
+                <!-- slide 3 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Soma de Convolução</h3>
+                        <p>Exemplo 2: Resolver $y[n] = x[n]*h[n]$.</p>
+                        <img width="390px" height="370px" data-src="./latexImg/conv1.png" alt="Represetação de Sinais">
+                        $*$
+                        <img width="390px" height="370px" data-src="./latexImg/conv3.png" alt="Represetação de Sinais">
+                    </div>
+                </section>
+                
+                <!-- slide 4 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Soma de Convolução</h3>
+                        <p>Exemplo 3: Resolver no Matlab/Octave.</p>
+                        
+                    </div>
+                </section>
+                
+                <!-- slide 5 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Propriedadades da Soma de Convolução</h3>
+                        <ul>
+                        <li>Comutativa: $x[n]*h[n] = h[n]*x[n]$</li><br>
+                        <li>Distributiva: $x[n]*(h_1[n]+h_2[n]) = x[n]*h_1[n] + x[n]*h_2[n]$</li><br>
+                        <li>Associativa: $y[n] = (x[n] * h_1[n]) * h_2[n] = x[n] * (h_1[n] * h_2[n])$</li><br>
+                        <li>Deslocamento: Se $x[n-n_0]*h[n-n_1] = y[n-n_0-n_1]$</li><br>
+                        <li>Largura: Se a largura de $x[n]$ é $L_1$ é $h[n]$ é $L_2$, então a largura de $x[n]*h[n] = L_1 + L_2 - 1$</li>
+                        </ul>                        
+                    </div>
+                </section>
+                
+                <!-- slide 6 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Soma de Convolução</h3>
+                        <p>Exemplo 3: Resolver</p>
+                        <p> $y_1[n] = x_1[n]*h[n]$</p>
+                        <p>$y_2[n] = x_2[n]*h[n]$</p>
+
+                        <ul type="a">Onde
+                            <li>$x_1[n]=\delta[n]$</li><br>
+                            <li>$x_2[n]=\delta[n]+\delta[n-1]+\delta[n-2]$</li><br>
+                            <li>$h[n]=\{3,2,1\}$ para $n\leq 0$</li>
+                        </ul>
+                    </div>
+                </section>
+                
+                <!-- slide 7 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Revisão - Tipo de Sistemas</h3>
+                        
+                        <p>Sistemas Lineares</p>
+                        <ul>
+                            <li>Aditividade: $x_1[n] \rightarrow y_1[n] $ e $ x_2[n] \rightarrow y_2[n] \Rightarrow x_1[n]+x_2[n] \rightarrow y_1[n]+y_2[n]$</li><br>
+                            <li>Homogeneidade: $x_1[n] \rightarrow y_1[n] \Rightarrow ax_1[n] \rightarrow ay_1[n]$</li>
+                        </ul>
+                        <p class="mediumfnt" style="text-align: left;"><b>Exemplo 1: </b>Verificar se o sistema abaixo é linear.</p>
+                          $$y[n] = \frac{x[n]}{n}$$
+                    </div>
+                </section>
+                
+                <!-- slide 8 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Revisão - Tipo de Sistemas</h3>
+                        
+                        <p>Sistemas Invariantes no Tempo</p>
+                        <ul>
+                          <li>Sistema para o qual ou atraso no tempo da sequência de entrada causa um deslocamento correspondente
+                              na sequência de saída, ou seja, o sistema não deve interferir temporalmente na saída em relação ao sinal de entrada.</li><br>
+                          <li>Se $x_2[n] = x_1[n - n_0]$, a saída produzirá uma sequência com valores $y_2[n] = y_1[n- n_0]$</li><br>
+                        </ul>
+                        <p class="mediumfnt" style="text-align: left;"><b>Exemplo 2: </b>Verificar se o sistema abaixo é invariante no tempo.</p>
+                          $$y[n] = x^2[n]$$
+                    </div>
+                </section>
+                
+                <!-- slide 9 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Revisão - Tipo de Sistemas</h3>
+                        <p>Sistemas Causais</p>
+                        <ul>
+                          <li>Sistema para o qual a saída não depende de sequências de entradas futuras, ou seja, depende de valores da sequência para $n \leq n_0$.</li><br>
+                          <li>Isso implica que, se $x_1[n] = x_2[n]$ para $n \leq n_0 $, então $y_1[n] = y_2[n]$ para $n \leq n_0$.</li><br>
+                        </ul>
+                        <p class="mediumfnt" style="text-align: left;"><b>Exemplo 3: </b>Verificar se os sistemas abaixo são causais.</p>
+                          $$y[n] = x[-n]$$
+                          $$y[n] = 5x[n-10]$$
+                    </div>
+                </section>
+                
+                <!-- slide 10 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Revisão - Tipo de Sistemas</h3>
+                        <p>Sitemas Estáveis</p>
+                        <ul>
+                          <li>Um sistema é estável no sentido entrada limitada saída limitada (BIBO, do inglês bounded-input, bounded-output) se, e somente se, toda sequência limitada de entrada produzir uma sequência limitada de saída.</li><br>
+                          <li>Ou seja, se o $max(|x[n]|) < \infty \Rightarrow$ $max(|y[n]|) < \infty$ </li><br>
+                        </ul>
+                        <p class="mediumfnt" style="text-align: left;"><b>Exemplo 4: </b>Verificar se o sistema abaixo é estável.</p>
+                          $$y[n] = nx[n]$$
+                    </div>
+                </section>
+                
+                <!-- slide 11 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Revisão - Sinais Singulares</h3>
+                        <p>Determinar o seguinte sinal:</p><br>
+                        <img width="450px" height="270px" data-src="./img/sing1.png" alt="Represetação de Sinais">
+                    </div>
+                </section>
+                
+                <!-- slide 12 -->
+                <section>
+                    <div class="bbox">
+                        <h3 style="color:rgb(1, 65, 108)">Representação no Domínio da Frequência de Sinais e Sistemas de Tempo Discreto</h3>
+                        
+                    </div>
+                </section>
+                
+
+   </div>
+  </div>
+
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+        
+        <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+        <script>
+          if( window.location.search.match( /print-pdf/gi ) ) {
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = 'reveal.js/css/print/pdf.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+          }
+        </script>
+
+        <script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// workaround to get a nice representation for printing
+				pdfMaxPagesPerSlide: 1,
+
+				// Vertical centering of slides
+				center: false,
+
+                // Hides the address bar on mobile devices
+                hideAddressBar: true,
+
+				// Display the page number of the current slide
+				slideNumber: 'c/t',
+
+				// Transition style
+				transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+				// Transition speed
+				transitionSpeed: 'fast', // default/fast/slow
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					// MathJax
+        			{ src: 'plugin/math/math.js', async: true }
+				]
+			});
+		</script>
+    </body>
+
+</html>
